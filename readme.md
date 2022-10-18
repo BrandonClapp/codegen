@@ -18,3 +18,5 @@
 - How to change file names?
   - Should be able to do something like name the file `{{VARIABLE_NAME}}.go` and do variable replacement on filenames.
 - How will templates support folder names?
+  - Folder names should be supported by the same template syntax. `{{SOME_VARIABLE | Snake}}` -> `whatever_var_was/`
+  - Alternatively, folders could just use a specific variable. It all depends on the template. `{{DEFINED_FOLDER_NAME}}`
