@@ -17,3 +17,4 @@
 
 - How to change file names?
   - Should be able to do something like name the file `{{VARIABLE_NAME}}.go` and do variable replacement on filenames.
+- How will templates support folder names?

@@ -1,0 +1,37 @@
+{
+  "templates": [
+    {
+      "name": "entity",
+      "inDir": "./entity",
+      "outDir": ".",
+      "variables": [
+        {
+          "moduleName": "person",
+          "plural": "People",
+          "properties": [
+            {
+              "name": "First",
+              "type": "string"
+            },
+            {
+              "name": "Last",
+              "type": "string"
+            },
+            {
+              "name": "Weight",
+              "type": "number"
+            },
+            {
+              "name": "Height",
+              "type": "number"
+            },
+            {
+              "name": "Age",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
