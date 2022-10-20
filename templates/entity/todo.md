@@ -1,2 +1,0 @@
-- These will need to be converted into Go templates
-- This will need to be structured as if I am executing it from the root of a nova app
