@@ -1,4 +1,4 @@
-package {{.MODULE_NAME}}
+package {{ .MODULE_TYPE | ToLower }}
 
 import (
 	"net/http"
@@ -26,7 +26,7 @@ func putOne(w http.ResponseWriter, r *http.Request) {
 		"color": entity.Color,
 	}
 
-	updated, err := {{.MODULE_TYPE_PLURAL}}.UpdateOne(updates, data.IDEquals(id))
+	updated, err := {{.MODULE_TYPE | Pluralize}}.UpdateOne(updates, data.IDEquals(id))
 
 	if err != nil {
 		coreHttp.WriteJsonResponse(w, &err, http.StatusInternalServerError)

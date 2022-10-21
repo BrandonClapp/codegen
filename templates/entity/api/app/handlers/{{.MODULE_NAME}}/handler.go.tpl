@@ -1,4 +1,4 @@
-package {{.MODULE_NAME}}
+package {{ .MODULE_TYPE | ToLower }}
 
 import "net/http"
 

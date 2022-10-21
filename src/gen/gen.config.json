@@ -6,31 +6,32 @@
       "outDir": "../../sandbox",
       "variables": {
         "MODULE_NAME": "person",
+        "TEST_VAR": 42,
         "MODULE_TYPE": "Person",
-        "MODULE_TYPE_PLURAL": "People",
-        "MODULE_PROPERTIES": [
+        "MODULE_STRUCT_PROPS": [
           {
-            "name": "First",
+            "name": "FirstName",
             "type": "string"
           },
           {
-            "name": "Last",
+            "name": "LastName",
             "type": "string"
           },
           {
             "name": "Weight",
-            "type": "number"
+            "type": "int"
           },
           {
             "name": "Height",
-            "type": "number"
+            "type": "int"
           },
           {
             "name": "Age",
-            "type": "number"
+            "type": "int"
           }
         ]
-      }
+      },
+      "afterFinish": "/usr/local/bin/gofmt -w ./codegen/tmp"
     }
   ]
 }

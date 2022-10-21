@@ -27,12 +27,11 @@ func TestSubstitution(t *testing.T) {
 
 func TestTemplateParse(t *testing.T) {
 	variables := map[string]interface{}{
-		"MODULE_NAME":        "person",
-		"MODULE_TYPE_PLURAL": "People",
+		"MODULE_TYPE": "Person",
 	}
 
 	tpl := `
-package {{.MODULE_NAME}}
+package {{ .MODULE_TYPE | ToLower }}
 
 import (
 "net/http"
@@ -44,7 +43,7 @@ import (
 
 // Get all
 func get(w http.ResponseWriter, r *http.Request) {
-	entities := {{.MODULE_TYPE_PLURAL}}.Get(nil)
+	entities := {{.MODULE_TYPE | Pluralize}}.Get(nil)
 	coreHttp.WriteJsonResponse(w, &entities, http.StatusOK)
 }
 `

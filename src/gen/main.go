@@ -9,10 +9,11 @@ import (
 )
 
 type Template struct {
-	Name      string
-	InDir     string
-	OutDir    string
-	Variables interface{}
+	Name        string
+	InDir       string
+	OutDir      string
+	Variables   interface{}
+	AfterFinish string
 }
 
 type Config struct {
@@ -20,6 +21,7 @@ type Config struct {
 }
 
 const ConfigFileName string = "gen.config.json"
+const TempDir string = "./.codegen/tmp"
 
 func main() {
 
@@ -51,8 +53,23 @@ func main() {
 
 	variables := template.Variables.(map[string]interface{})
 
-	w := &Walker{}
-	w.Walk(template.InDir, template.OutDir, variables)
+	// generate output into temp directory
+	Generate(template.InDir, TempDir, variables)
+
+	if template.AfterFinish != "" {
+		// TODO: Get gofmt working after generation
+		// permission issues
+		// cmd := exec.Command(template.AfterFinish)
+		// wd, _ := os.Getwd()
+		// cmd.Path = wd
+		// err := cmd.Run()
+
+		// if err != nil {
+		// 	panic(err)
+		// }
+
+		// fmt.Println("after finish ran")
+	}
 }
 
 func getTemplate(templates *[]Template, name string) *Template {

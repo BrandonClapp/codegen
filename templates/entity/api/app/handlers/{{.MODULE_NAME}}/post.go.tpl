@@ -1,4 +1,4 @@
-package {{.MODULE_NAME}}
+package {{ .MODULE_TYPE | ToLower }}
 
 import (
 	"log"
@@ -12,7 +12,7 @@ func post(w http.ResponseWriter, r *http.Request) {
 
 	coreHttp.ParseBody(w, r, entity)
 
-	created, err := {{.MODULE_TYPE_PLURAL}}.Create(entity)
+	created, err := {{.MODULE_TYPE | Pluralize}}.Create(entity)
 
 	if err != nil {
 		log.Fatalf("%s", err)

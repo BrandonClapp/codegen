@@ -1,4 +1,4 @@
-package {{.MODULE_NAME}}
+package {{ .MODULE_TYPE | ToLower }}
 
 import (
 	"net/http"
@@ -10,7 +10,7 @@ import (
 
 // Get all
 func get(w http.ResponseWriter, r *http.Request) {
-	entities := {{.MODULE_TYPE_PLURAL}}.Get(nil)
+	entities := {{.MODULE_TYPE | Pluralize }}.Get(nil)
 	coreHttp.WriteJsonResponse(w, &entities, http.StatusOK)
 }
 
@@ -25,7 +25,7 @@ func getOne(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	{{.MODULE_NAME}}, err := {{.MODULE_TYPE_PLURAL}}.GetOne(data.IDEquals(id))
+	{{.MODULE_NAME}}, err := {{.MODULE_TYPE | Pluralize}}.GetOne(data.IDEquals(id))
 
 	if err != nil {
 		coreHttp.WriteJsonResponse(w, &err, http.StatusNotFound)
