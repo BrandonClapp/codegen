@@ -8,14 +8,19 @@ import (
 	"strings"
 )
 
+type Vars map[string]interface{}
+
 type Walker struct {
 }
 
 func (w *Walker) Walk(inPath, outPath string, variables map[string]interface{}) {
 	filepath.Walk(inPath, func(path string, info fs.FileInfo, err error) error {
 
+		// substitute any variables found in files and folder paths
+		path = SubstituteVariables(path, variables)
+
+		// find the equivelent output path for this file or folder
 		out := strings.ReplaceAll(path, inPath, outPath)
-		fmt.Println(out)
 
 		// create directories in the output
 		if info.IsDir() && !pathExists(out) {
@@ -47,4 +52,20 @@ func pathExists(path string) bool {
 		return false
 	}
 	return true
+}
+
+func SubstituteVariables(path string, variables Vars) string {
+	p := path
+	for k, v := range variables {
+		switch val := v.(type) {
+		case string:
+			// only string variables can be substituted
+			p = strings.ReplaceAll(p, "{{"+k+"}}", val)
+		default:
+			continue
+		}
+
+	}
+
+	return p
 }

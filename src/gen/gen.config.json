@@ -3,7 +3,7 @@
     {
       "name": "entity",
       "inDir": "../../templates/entity",
-      "outDir": ".",
+      "outDir": "../../sandbox",
       "variables": {
         "MODULE_NAME": "person",
         "MODULE_NAME_PLURAL": "People",
