@@ -19,6 +19,8 @@ type Config struct {
 	Templates []Template
 }
 
+const ConfigFileName string = "gen.config.json"
+
 func main() {
 
 	args := getArgs()
@@ -29,28 +31,32 @@ func main() {
 	tpl := args[1]
 
 	// Read in config from current directory
-	buf, err := ioutil.ReadFile("gen.config.json")
+	buf, err := ioutil.ReadFile(ConfigFileName)
 	if err != nil {
-		panic("gen.config.json file not in this directory")
+		panic(fmt.Sprintf("%s file not in this directory", ConfigFileName))
 	}
 
 	// Unmarshal to config type
 	config := Config{}
 	err = json.Unmarshal(buf, &config)
 	if err != nil {
-		panic("Unable to serialize gen.config.json")
+		panic(fmt.Sprintf("Unable to serialize %s", ConfigFileName))
 	}
 
 	template := getTemplate(&config.Templates, tpl)
 
 	if template == nil {
-		panic(fmt.Sprintf("Unable to find template with name %s in gen.config.json", tpl))
+		panic(fmt.Sprintf("Unable to find template with name %s in %s", tpl, ConfigFileName))
 	}
 
-	configMap := template.Variables.(map[string]interface{})
+	variables := template.Variables.(map[string]interface{})
 
-	fmt.Println(configMap["MODULE_NAME"])
+	fmt.Println(variables["MODULE_NAME"])
+	fmt.Println(template.InDir)
+	fmt.Println(template.OutDir)
 
+	w := &Walker{}
+	w.Walk(template.InDir, template.OutDir, variables)
 }
 
 func getTemplate(templates *[]Template, name string) *Template {
