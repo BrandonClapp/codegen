@@ -6,7 +6,8 @@
       "outDir": "../../sandbox",
       "variables": {
         "MODULE_NAME": "person",
-        "MODULE_NAME_PLURAL": "People",
+        "MODULE_TYPE": "Person",
+        "MODULE_TYPE_PLURAL": "People",
         "MODULE_PROPERTIES": [
           {
             "name": "First",

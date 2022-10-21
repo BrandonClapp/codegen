@@ -51,10 +51,6 @@ func main() {
 
 	variables := template.Variables.(map[string]interface{})
 
-	fmt.Println(variables["MODULE_NAME"])
-	fmt.Println(template.InDir)
-	fmt.Println(template.OutDir)
-
 	w := &Walker{}
 	w.Walk(template.InDir, template.OutDir, variables)
 }

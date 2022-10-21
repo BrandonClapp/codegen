@@ -1,4 +1,4 @@
-package {{MODULE_NAME}}
+package {{.MODULE_NAME}}
 
 import (
 	"net/http"
@@ -18,7 +18,7 @@ func deleteOne(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	deletedID, err := {{MODULE_TYPE_PLURAL}}.DeleteOne(data.IDEquals(id))
+	deletedID, err := {{.MODULE_TYPE_PLURAL}}.DeleteOne(data.IDEquals(id))
 
 	if err != nil {
 		coreHttp.WriteJsonResponse(w, &err, http.StatusNotFound)
