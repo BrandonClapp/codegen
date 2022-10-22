@@ -107,9 +107,9 @@ Example:
 ```
 {{ $arrayLength := len .SomeArrayVariable }}
 {{- range $i, $val := .SomeArrayVariable -}}
-		{{- if (IsLast $i $arrayLength) -}}
-      {{$val}} is the last element
-    {{ end }}
+  {{- if (IsLast $i $arrayLength) -}}
+    {{$val}} is the last element
+  {{ end }}
 {{- end }}
 ```
 
