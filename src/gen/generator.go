@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/fs"
 	"io/ioutil"
-	"os"
 	"path/filepath"
 	"strings"
 	"text/template"
@@ -15,19 +14,18 @@ import (
 
 type Vars map[string]interface{}
 
-func Generate(templateRootPath, outputPath string, variables map[string]interface{}) error {
+type TemplateOutput map[string]string
 
-	// create temp directory
-	if !pathExists(outputPath) {
-		err := os.MkdirAll(outputPath, os.ModePerm)
+func Generate(templateRootPath string, variables map[string]interface{}) (*TemplateOutput, error) {
 
-		if err != nil {
-			return err
-		}
-	}
+	InMemoryFS := make(TemplateOutput)
 
 	// iterate over every file and folder in the template directory
 	err := filepath.Walk(templateRootPath, func(path string, info fs.FileInfo, err error) error {
+
+		if info.IsDir() {
+			return nil
+		}
 
 		// substitute any variables found in files and folder paths
 		resolvedPath, err := RenderTemplate(path, path, variables)
@@ -36,18 +34,7 @@ func Generate(templateRootPath, outputPath string, variables map[string]interfac
 			return err
 		}
 
-		tempOut := strings.ReplaceAll(resolvedPath, templateRootPath, outputPath)
-
-		// create directories in the output
-		if info.IsDir() && !pathExists(tempOut) {
-			fmt.Printf("Making dir at %s \n", tempOut)
-			os.Mkdir(tempOut, os.ModePerm)
-			return nil
-		}
-
-		if info.IsDir() {
-			return nil
-		}
+		resolvedPath = strings.ReplaceAll(resolvedPath, templateRootPath, "")
 
 		// read the template file contents
 		buf, err := ioutil.ReadFile(path)
@@ -60,50 +47,35 @@ func Generate(templateRootPath, outputPath string, variables map[string]interfac
 		content, err := RenderTemplate(path, string(buf), variables)
 
 		if err != nil {
-			// an error occured while transforming the template, roll back
-			fmt.Printf("\nError: %s\n\nRemoving %s", err.Error(), outputPath)
-			cleanup(outputPath)
+			// an error occured while transforming the template, abort
+			fmt.Printf("\nError tranforming %s:\n%s\n", path, err.Error())
 			return err
 		}
 
 		// remove .tpl extension from template
-		tempOut = strings.ReplaceAll(tempOut, ".tpl", "")
-		abs, _ := filepath.Abs(tempOut)
+		resolvedPath = strings.ReplaceAll(resolvedPath, ".tpl", "")
 
-		// write the transformed file to the temp directory
-		err = ioutil.WriteFile(abs, []byte(content), os.ModePerm)
-
-		if err != nil {
-			// fmt.Println(err.Error())
-			return err
-		}
+		// add the transformed file to the map
+		InMemoryFS[resolvedPath] = string(content)
 
 		return nil
 	})
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return &InMemoryFS, nil
 
 }
 
-func pathExists(path string) bool {
-	_, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
-}
-
-func cleanup(outputPath string) {
-	err := os.RemoveAll(outputPath)
-
-	if err != nil {
-		panic(err)
-	}
-}
+// func pathExists(path string) bool {
+// 	_, err := os.Stat(path)
+// 	if os.IsNotExist(err) {
+// 		return false
+// 	}
+// 	return true
+// }
 
 // https://github.com/iancoleman/strcase
 var funcMap = template.FuncMap{
@@ -115,6 +87,8 @@ var funcMap = template.FuncMap{
 	"ToCamel":          strcase.ToCamel,          // AnyKindOfString
 	"ToLowerCamel":     strcase.ToLowerCamel,     // anyKindOfString
 	"Pluralize":        Pluralize,                // Person -> People
+	"IsLast":           IsLast,
+	"ToPostgresType":   ToPostgresType, // Convert to postgres column type
 }
 
 func RenderTemplate(name, content string, variables Vars) (string, error) {

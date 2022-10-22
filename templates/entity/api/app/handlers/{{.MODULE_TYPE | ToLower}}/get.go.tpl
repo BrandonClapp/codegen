@@ -25,12 +25,12 @@ func getOne(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	{{.MODULE_NAME}}, err := {{.MODULE_TYPE | Pluralize}}.GetOne(data.IDEquals(id))
+	{{ .MODULE_TYPE | ToLowerCamel }}, err := {{.MODULE_TYPE | Pluralize}}.GetOne(data.IDEquals(id))
 
 	if err != nil {
 		coreHttp.WriteJsonResponse(w, &err, http.StatusNotFound)
 		return
 	}
 
-	coreHttp.WriteJsonResponse(w, &{{.MODULE_NAME}}, http.StatusOK)
+	coreHttp.WriteJsonResponse(w, &{{.MODULE_TYPE | ToLowerCamel}}, http.StatusOK)
 }

@@ -6,7 +6,6 @@
       "outDir": "../../sandbox",
       "variables": {
         "MODULE_NAME": "person",
-        "TEST_VAR": 42,
         "MODULE_TYPE": "Person",
         "MODULE_STRUCT_PROPS": [
           {
@@ -30,8 +29,7 @@
             "type": "int"
           }
         ]
-      },
-      "afterFinish": "/usr/local/bin/gofmt -w ./codegen/tmp"
+      }
     }
   ]
 }

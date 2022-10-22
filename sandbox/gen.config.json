@@ -5,28 +5,19 @@
       "inDir": "../templates/entity",
       "outDir": ".",
       "variables": {
-        "MODULE_NAME": "person",
-        "MODULE_NAME_PLURAL": "People",
-        "MODULE_PROPERTIES": [
+        "MODULE_TYPE": "Payment",
+        "MODULE_STRUCT_PROPS": [
           {
-            "name": "First",
+            "name": "Title",
             "type": "string"
           },
           {
-            "name": "Last",
+            "name": "Amount",
             "type": "string"
           },
           {
-            "name": "Weight",
-            "type": "number"
-          },
-          {
-            "name": "Height",
-            "type": "number"
-          },
-          {
-            "name": "Age",
-            "type": "number"
+            "name": "Date",
+            "type": "string"
           }
         ]
       }

@@ -21,7 +21,6 @@ type Config struct {
 }
 
 const ConfigFileName string = "gen.config.json"
-const TempDir string = "./.codegen/tmp"
 
 func main() {
 
@@ -54,7 +53,13 @@ func main() {
 	variables := template.Variables.(map[string]interface{})
 
 	// generate output into temp directory
-	Generate(template.InDir, TempDir, variables)
+	generated, err := Generate(template.InDir, variables)
+
+	if err != nil {
+		panic(err)
+	}
+
+	WriteTemplateOutput(template.OutDir, generated)
 
 	if template.AfterFinish != "" {
 		// TODO: Get gofmt working after generation
