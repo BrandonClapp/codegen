@@ -13,7 +13,7 @@
           },
           {
             "name": "Amount",
-            "type": "string"
+            "type": "int"
           },
           {
             "name": "Date",
