@@ -7,9 +7,7 @@ import (
 
 func TestSubstitution(t *testing.T) {
 	variables := map[string]interface{}{
-		"MODULE_NAME":    "person",
-		"SOMETHING_ELSE": 42,
-		// TODO: Verify if Unmarshal serializes to int
+		"MODULE_NAME": "person",
 	}
 
 	path := "./../some/folder/{{.MODULE_NAME}}"

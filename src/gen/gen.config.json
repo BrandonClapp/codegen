@@ -5,7 +5,6 @@
       "inDir": "../../templates/entity",
       "outDir": "../../sandbox",
       "variables": {
-        "MODULE_NAME": "person",
         "MODULE_TYPE": "Person",
         "MODULE_STRUCT_PROPS": [
           {

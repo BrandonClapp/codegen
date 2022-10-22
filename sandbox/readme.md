@@ -1,1 +1,3 @@
-This is where the tool will be ran and output files to
+Use this folder to experiment with running `codegen <templateName>`
+
+Template input directory, output directory, and variables are defined in `gen.config.json`

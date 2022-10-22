@@ -60,8 +60,8 @@ func Generate(templateRootPath string, variables map[string]interface{}) (*Templ
 			return err
 		}
 
-		// remove .tpl extension from template
-		resolvedPath = strings.ReplaceAll(resolvedPath, ".tpl", "")
+		// remove .gtpl extension from template
+		resolvedPath = strings.ReplaceAll(resolvedPath, ".gtpl", "")
 
 		// add the transformed file to the map
 		InMemoryFS[resolvedPath] = string(content)
