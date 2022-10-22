@@ -60,21 +60,6 @@ func main() {
 	}
 
 	WriteTemplateOutput(template.OutDir, generated)
-
-	if template.AfterFinish != "" {
-		// TODO: Get gofmt working after generation
-		// permission issues
-		// cmd := exec.Command(template.AfterFinish)
-		// wd, _ := os.Getwd()
-		// cmd.Path = wd
-		// err := cmd.Run()
-
-		// if err != nil {
-		// 	panic(err)
-		// }
-
-		// fmt.Println("after finish ran")
-	}
 }
 
 func getTemplate(templates *[]Template, name string) *Template {

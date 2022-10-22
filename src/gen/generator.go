@@ -69,14 +69,6 @@ func Generate(templateRootPath string, variables map[string]interface{}) (*Templ
 
 }
 
-// func pathExists(path string) bool {
-// 	_, err := os.Stat(path)
-// 	if os.IsNotExist(err) {
-// 		return false
-// 	}
-// 	return true
-// }
-
 // https://github.com/iancoleman/strcase
 var funcMap = template.FuncMap{
 	"ToLower":          strings.ToLower,          // anykindofstring
