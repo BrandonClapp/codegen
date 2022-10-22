@@ -4,9 +4,11 @@
 
 Go is not required to be installed, just that the templates are written using Go template engine syntax and use the `.gtpl` extension.
 
+---
+
 ## gen.config.json
 
-`gen.config.json` is the configuration file used by the `codegen` CLI and **must** be present in the directory in which `codegen` is executed.
+`gen.config.json` is the configuration file used by the `codegen` CLI and **must** be present in the directory in which `codegen` is executed and defines information about all template directories, output, and injected variables.
 
 ### Schema
 
@@ -57,6 +59,19 @@ type {{ .MODULE_TYPE }} struct {
 	{{ end }}
 }
 ```
+
+Output:
+
+```go
+type Person struct {
+	ID    string  `json:"id"`
+	Title string `json:"title"`
+	Amount int `json:"amount"`
+	Date string `json:"date"`
+}
+```
+
+---
 
 ## Template Helper Functions
 

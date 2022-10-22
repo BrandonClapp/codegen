@@ -8,24 +8,16 @@
         "MODULE_TYPE": "Person",
         "MODULE_STRUCT_PROPS": [
           {
-            "name": "FirstName",
+            "name": "Title",
             "type": "string"
           },
           {
-            "name": "LastName",
+            "name": "Amount",
+            "type": "int"
+          },
+          {
+            "name": "Date",
             "type": "string"
-          },
-          {
-            "name": "Weight",
-            "type": "int"
-          },
-          {
-            "name": "Height",
-            "type": "int"
-          },
-          {
-            "name": "Age",
-            "type": "int"
           }
         ]
       }
