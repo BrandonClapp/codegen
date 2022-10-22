@@ -105,10 +105,12 @@ Some helper functions are provided to make transforming variables easier.
 Example:
 
 ```
-{{ $propListLen := len .MODULE_STRUCT_PROPS }}
-{{- range $i, $val := .MODULE_STRUCT_PROPS -}}
-		{{ if eq $i 0 }} {{ end }}"{{ $val.name | ToSnake }}"{{ if not (IsLast $i $propListLen) }}, {{ end }}
-{{- end }}`,
+{{ $arrayLength := len .SomeArrayVariable }}
+{{- range $i, $val := .SomeArrayVariable -}}
+		{{- if (IsLast $i $arrayLength) -}}
+      {{$val}} is the last element
+    {{ end }}
+{{- end }}
 ```
 
 **Misc Notes**
