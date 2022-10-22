@@ -1,5 +1,5 @@
 export interface {{.TYPE | ToCamel }} {
-    {{ range $val := .PROPS -}}
+	{{ range $val := .PROPS -}}
 	{{$val.name | ToLowerCamel }}: {{$val.type}};
 	{{ end }}
 }

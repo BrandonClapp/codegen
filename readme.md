@@ -73,7 +73,7 @@ export interface {{.TYPE | ToCamel }} {
 }
 ```
 
-Output: `./models/upcomingMovie.ts`
+Outputs: `./models/upcomingMovie.ts`
 
 ```ts
 export interface UpcomingMovie {
