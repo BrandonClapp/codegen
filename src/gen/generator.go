@@ -20,6 +20,10 @@ func Generate(templateRootPath string, variables map[string]interface{}) (*Templ
 
 	InMemoryFS := make(TemplateOutput)
 
+	if strings.HasPrefix(templateRootPath, "./") {
+		templateRootPath = templateRootPath[2:]
+	}
+
 	// iterate over every file and folder in the template directory
 	err := filepath.Walk(templateRootPath, func(path string, info fs.FileInfo, err error) error {
 
