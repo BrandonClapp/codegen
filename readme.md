@@ -69,9 +69,9 @@ Reads: `../templates/interface/models/{{.TYPE | ToLowerCamel}}.ts.gtpl`
 
 ```
 export interface {{.TYPE | ToCamel }} {
-    {{ range $val := .PROPS -}}
-	{{$val.name | ToLowerCamel }}: {{$val.type}};
-	{{ end }}
+{{ range $val := .PROPS -}}
+  {{$val.name | ToLowerCamel }}: {{$val.type}};
+{{ end }}
 }
 ```
 
