@@ -63,7 +63,7 @@ Command (ran from directory containing config file):
 codegen interface
 ```
 
-Reads: **../templates/interface/models/{{.TYPE | ToLowerCamel}}.ts.gtpl**
+Reads: `../templates/interface/models/{{.TYPE | ToLowerCamel}}.ts.gtpl`
 
 ```
 export interface {{.TYPE | ToCamel }} {
@@ -73,7 +73,7 @@ export interface {{.TYPE | ToCamel }} {
 }
 ```
 
-Output: **./models/upcomingMovie.ts**
+Output: `./models/upcomingMovie.ts`
 
 ```ts
 export interface UpcomingMovie {
