@@ -21,6 +21,28 @@
           }
         ]
       }
+    },
+    {
+      "name": "interface",
+      "inDir": "../../templates/interface",
+      "outDir": "../../sandbox",
+      "variables": {
+        "TYPE": "Person",
+        "PROPS": [
+          {
+            "name": "FirstName",
+            "type": "string"
+          },
+          {
+            "name": "LastName",
+            "type": "string"
+          },
+          {
+            "name": "Age",
+            "type": "number"
+          }
+        ]
+      }
     }
   ]
 }

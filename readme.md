@@ -6,11 +6,11 @@ Go is not required to be installed, just that the templates are written using Go
 
 ---
 
-## gen.config.json
+### gen.config.json
 
 `gen.config.json` is the configuration file used by the `codegen` CLI and **must** be present in the directory in which `codegen` is executed and defines information about all template directories, output, and injected variables.
 
-### Schema
+**Properties**
 
 - `templates` (array) \*required - Defines all templates that can be transformed
   - `name` (string) \*required - The unique name of the template
@@ -18,29 +18,33 @@ Go is not required to be installed, just that the templates are written using Go
   - `ourDir` (string) \*required - The directory where the transformed template will be output
   - `variables` (object) - Variables that will be injected into each template file
 
-Below is an example of what `gen.config.json` may look like.
+---
+
+## Example
+
+**gen.config.json**
 
 ```json
 {
   "templates": [
     {
-      "name": "entity",
-      "inDir": "../templates/entity",
-      "outDir": ".",
+      "name": "interface",
+      "inDir": "../../templates/interface",
+      "outDir": "../../sandbox",
       "variables": {
-        "MODULE_TYPE": "Payment",
-        "MODULE_STRUCT_PROPS": [
+        "TYPE": "Person",
+        "PROPS": [
           {
-            "name": "Title",
+            "name": "FirstName",
             "type": "string"
           },
           {
-            "name": "Amount",
-            "type": "int"
+            "name": "LastName",
+            "type": "string"
           },
           {
-            "name": "Date",
-            "type": "string"
+            "name": "Age",
+            "type": "number"
           }
         ]
       }
@@ -49,25 +53,29 @@ Below is an example of what `gen.config.json` may look like.
 }
 ```
 
-Variables can then be used in templates like so:
+Command (ran from directory containing config file):
 
-```gotpl
-type {{ .MODULE_TYPE }} struct {
-	ID    string  `json:"id"`
-	{{ range $val := .MODULE_STRUCT_PROPS -}}
-	{{.name}} {{$val.type}} `json:"{{$val.name | ToLowerCamel }}"`
+```
+codegen interface
+```
+
+Reads: **../templates/interface/interface.ts.gtpl**
+
+```
+export interface {{.TYPE}} {
+  {{ range $val := .PROPS -}}
+	{{$val.name | ToLowerCamel }}: {{$val.type}};
 	{{ end }}
 }
 ```
 
-Output:
+Output: **./interface.ts**
 
-```go
-type Person struct {
-	ID    string  `json:"id"`
-	Title string `json:"title"`
-	Amount int `json:"amount"`
-	Date string `json:"date"`
+```ts
+export interface Person {
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 ```
 
@@ -102,3 +110,8 @@ Example:
 		{{ if eq $i 0 }} {{ end }}"{{ $val.name | ToSnake }}"{{ if not (IsLast $i $propListLen) }}, {{ end }}
 {{- end }}`,
 ```
+
+**Misc Notes**
+
+- Templates may contain nested folders. The output will retain this folder structure relative to the `outDir`
+- Template file and folder names may contain template syntax, i.e `{{ .SomeVariable | ToSnake }}.py`
