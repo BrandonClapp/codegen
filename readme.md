@@ -32,19 +32,23 @@ Go is not required to be installed, just that the templates are written using Go
       "inDir": "../../templates/interface",
       "outDir": "../../sandbox",
       "variables": {
-        "TYPE": "Person",
+        "TYPE": "UpcomingMovie",
         "PROPS": [
           {
-            "name": "FirstName",
+            "name": "Name",
             "type": "string"
           },
           {
-            "name": "LastName",
+            "name": "Rating",
             "type": "string"
           },
           {
-            "name": "Age",
+            "name": "LengthInMinutes",
             "type": "number"
+          },
+          {
+            "name": "ReleaseDate",
+            "type": "Date"
           }
         ]
       }
@@ -59,23 +63,24 @@ Command (ran from directory containing config file):
 codegen interface
 ```
 
-Reads: **../templates/interface/interface.ts.gtpl**
+Reads: **../templates/interface/models/{{.TYPE | ToLowerCamel}}.ts.gtpl**
 
 ```
-export interface {{.TYPE}} {
-  {{ range $val := .PROPS -}}
+export interface {{.TYPE | ToCamel }} {
+    {{ range $val := .PROPS -}}
 	{{$val.name | ToLowerCamel }}: {{$val.type}};
 	{{ end }}
 }
 ```
 
-Output: **./interface.ts**
+Output: **./models/upcomingMovie.ts**
 
 ```ts
-export interface Person {
-  firstName: string;
-  lastName: string;
-  age: number;
+export interface UpcomingMovie {
+  name: string;
+  rating: string;
+  lengthInMinutes: number;
+  releaseDate: Date;
 }
 ```
 

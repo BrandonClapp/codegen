@@ -27,19 +27,23 @@
       "inDir": "../../templates/interface",
       "outDir": "../../sandbox",
       "variables": {
-        "TYPE": "Person",
+        "TYPE": "UpcomingMovie",
         "PROPS": [
           {
-            "name": "FirstName",
+            "name": "Name",
             "type": "string"
           },
           {
-            "name": "LastName",
+            "name": "Rating",
             "type": "string"
           },
           {
-            "name": "Age",
+            "name": "LengthInMinutes",
             "type": "number"
+          },
+          {
+            "name": "ReleaseDate",
+            "type": "Date"
           }
         ]
       }
