@@ -27,6 +27,10 @@ func Generate(templateRootPath string, variables map[string]interface{}) (*Templ
 	// iterate over every file and folder in the template directory
 	err := filepath.Walk(templateRootPath, func(path string, info fs.FileInfo, err error) error {
 
+		if info == nil {
+			panic(fmt.Sprintf("no directory specified at %s", templateRootPath))
+		}
+
 		if info.IsDir() {
 			return nil
 		}

@@ -2,7 +2,7 @@
   "templates": [
     {
       "name": "entity",
-      "inDir": "./templates/entity",
+      "inDir": "../../templates/entity",
       "outDir": "../../sandbox",
       "variables": {
         "MODULE_NAME": "person",

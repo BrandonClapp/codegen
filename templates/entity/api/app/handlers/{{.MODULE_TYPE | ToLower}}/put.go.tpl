@@ -22,8 +22,9 @@ func putOne(w http.ResponseWriter, r *http.Request) {
 	coreHttp.ParseBody(w, r, entity)
 
 	updates := map[string]interface{}{
-		"name":  entity.Name,
-		"color": entity.Color,
+		{{ range $val := .MODULE_STRUCT_PROPS -}}
+		"{{.name | ToSnake}}": entity.{{$val.name | ToCamel }},
+		{{ end }}
 	}
 
 	updated, err := {{.MODULE_TYPE | Pluralize}}.UpdateOne(updates, data.IDEquals(id))
