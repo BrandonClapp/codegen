@@ -1,5 +1,7 @@
 # Codegen
 
+**[Demo](https://www.youtube.com/watch?v=QxpDWy37Z2Y)**
+
 `codegen` is a command line utility that transforms [Go templates](<(https://pkg.go.dev/text/template)>) from a provided input directory, using variables defined in a configuration file (`gen.config.json`), and then writes the output to a provided output directory.
 
 Go is not required to be installed, just that the templates are written using Go template engine syntax and use the `.gtpl` extension.
