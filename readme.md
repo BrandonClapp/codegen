@@ -64,20 +64,22 @@ Some helper functions are provided to make transforming variables easier.
 
 ### String helpers
 
-| Function             | Input             | Output             | Usage                                 |
-| -------------------- | ----------------- | ------------------ | ------------------------------------- |
-| **ToLower**          | AnyKind_of-STRING | anykindofstring    | `{{ .MyString \| ToLower }}`          |
-| **ToKebab**          | AnyKind_of-STRING | any-kind-of-string | `{{ .MyString \| ToKebab }}`          |
-| **ToScreamingKebab** | AnyKind_of-STRING | ANY-KIND-OF-STRING | `{{ .MyString \| ToScreamingKebab }}` |
-| **ToSnake**          | AnyKind_of-STRING | any_kind_of_string | `{{ .MyString \| ToSnake }}`          |
-| **ToScreamingSnake** | AnyKind_of-STRING | ANY_KIND_OF_STRING | `{{ .MyString \| ToScreamingSnake }}` |
-| **ToCamel**          | AnyKind_of-STRING | AnyKindOfString    | `{{ .MyString \| ToCamel }}`          |
-| **ToLowerCamel**     | AnyKind_of-STRING | anyKindOfString    | `{{ .MyString \| ToLowerCamel }}`     |
-| **Pluralize**        | Person            | People             | `{{ .MyString \| Pluralize }}`        |
+| Function             | Input             | Output             | Usage                               |
+| -------------------- | ----------------- | ------------------ | ----------------------------------- |
+| **ToLower**          | AnyKind_of-STRING | anykindofstring    | `{{.MyString \| ToLower}}`          |
+| **ToKebab**          | AnyKind_of-STRING | any-kind-of-string | `{{.MyString \| ToKebab}}`          |
+| **ToScreamingKebab** | AnyKind_of-STRING | ANY-KIND-OF-STRING | `{{.MyString \| ToScreamingKebab}}` |
+| **ToSnake**          | AnyKind_of-STRING | any_kind_of_string | `{{.MyString \| ToSnake}}`          |
+| **ToScreamingSnake** | AnyKind_of-STRING | ANY_KIND_OF_STRING | `{{.MyString \| ToScreamingSnake}}` |
+| **ToCamel**          | AnyKind_of-STRING | AnyKindOfString    | `{{.MyString \| ToCamel}}`          |
+| **ToLowerCamel**     | AnyKind_of-STRING | anyKindOfString    | `{{.MyString \| ToLowerCamel}}`     |
+| **Pluralize**        | Person            | People             | `{{.MyString \| Pluralize}}`        |
 
 ### Array helpers
 
-**IsLast**
+**IsLast** - determine if an index is the last index in an array
+
+Example:
 
 ```
 {{ $propListLen := len .MODULE_STRUCT_PROPS }}
